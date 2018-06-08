@@ -38,9 +38,12 @@ function makebuttons() {
                         var gifDiv = $("<div>");
                         gifDiv.addClass("item");
                         var animalImage = $("<img>");
+                        var p = $("<p>").text("Rating: " + results[i].rating);
                         animalImage.attr("src", results[i].images.fixed_height.url);
                         gifDiv.append(animalImage);
+                        gifDiv.append(p);
                         $("#GifField").prepend(gifDiv);
+
                     };
                 });
 
@@ -54,3 +57,4 @@ function makebuttons() {
 };
 
 makebuttons();
+
