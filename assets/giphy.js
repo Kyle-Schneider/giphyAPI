@@ -26,7 +26,7 @@ function makebuttons() {
                 url: queryURL,
                 method: "GET"
             })
-                .then(function (response) {
+               .then(function (response) {
 
 
                     console.log(queryURL);
@@ -38,23 +38,61 @@ function makebuttons() {
                         var gifDiv = $("<div>");
                         gifDiv.addClass("item");
                         var animalImage = $("<img>");
+                        animalImage.attr("data-still",results[i].images.fixed_height_still.url)
                         var p = $("<p>").text("Rating: " + results[i].rating);
+                        animalImage.attr("data-animate", results[i].images.fixed_height.url);
+                        animalImage.attr('data-state', "animate")
                         animalImage.attr("src", results[i].images.fixed_height.url);
                         gifDiv.append(animalImage);
                         gifDiv.append(p);
                         $("#GifField").prepend(gifDiv);
 
+                       
+                             $(animalImage).on("click", function() {
+
+                                    var state = $(this).attr('data-state');
+                                    
+
+                                    if (state === "still") {
+                                        $(this).attr("src", $(this).attr("data-animate"));
+                                        $(this).attr("data-state", "animate");
+                                      } else {
+                                        $(this).attr("src", $(this).attr("data-still"));
+                                        $(this).attr("data-state", "still");
+                                      }
+                                    });
+                                
                     };
                 });
-
-
             console.log($(this).html())
         })
-
-
         $("#buttonfield").append(button);
     }
+
+    
 };
+
+
 
 makebuttons();
 
+$("#submitbutton").on("click", function (event) {
+    event.preventDefault();
+    $(this).push(topics);
+    console.log(topics);
+});
+
+
+
+
+
+                        //     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+                             
+                       
+                          
+                        
+                   
+
+                    
+
+           
